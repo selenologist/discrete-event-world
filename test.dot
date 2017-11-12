@@ -1,0 +1,124 @@
+digraph big{
+rankdir = LR
+"Almeda Longerich(F23)Consolata Lilithe(FM25)" -> "Debra Lilithe(M3)"
+"Almeda Longerich(F23)" -> "Consolata Lilithe(FM25)" [dir=none,color="green"]
+"Almeda Longerich(F23)Consolata Lilithe(FM25)" [label="",shape=diamond,height=.1,width=.1]"Almeda Longerich(F23)" -> "Almeda Longerich(F23)Consolata Lilithe(FM25)" [color="red"]
+"Almeda Longerich(F23)Consolata Lilithe(FM25)" -> "Sara Lilithe(M4)"
+"Almeda Longerich(F23)Consolata Lilithe(FM25)" -> "Tricia Lilithe(FM0)"
+"Almeda Longerich(F23)Consolata Lilithe(FM25)" -> "Zelma Lilithe(F1)"
+"Belicia Amie(M38)" -> "Devan Guilbert(F26)Belicia Amie(M38)" [color="blue"]
+"Belicia Amie(M38)" -> "Drusie Longerich(F21)Belicia Amie(M38)" [color="blue"]
+"Blanche Stanhope(M63)" -> "Mair Amie(F39)Blanche Stanhope(M63)" [color="blue"]
+"Blanche Stanhope(M63)" -> "Teodora Daven(F25)Blanche Stanhope(M63)" [color="blue"]
+"Bonnibelle Longerich(M43)" -> "Candace Lilithe(F24)Bonnibelle Longerich(M43)" [color="blue"]
+"Bonnibelle Longerich(M43)" -> "Devan Guilbert(F26)Bonnibelle Longerich(M43)" [color="blue"]
+"Bonnibelle Longerich(M43)" -> "Wilhelmina Amie(F42)Bonnibelle Longerich(M43)" [color="blue"]
+"Buffy Guilbert(M45)" -> "Catriona Longerich(F45)Buffy Guilbert(M45)" [color="blue"]
+"Buffy Guilbert(M45)" -> "Debbie Daven(F23)Buffy Guilbert(M45)" [color="blue"]
+"Buffy Guilbert(M45)" -> "Myrtie Guilbert(F42)Buffy Guilbert(M45)" [color="blue"]
+"Candace Lilithe(F24)Bonnibelle Longerich(M43)" -> "Elfreda Longerich(M4)"
+"Candace Lilithe(F24)Bonnibelle Longerich(M43)" [label="",shape=diamond,height=.1,width=.1]"Candace Lilithe(F24)" -> "Candace Lilithe(F24)Bonnibelle Longerich(M43)" [color="red"]
+"Candace Lilithe(F24)Bonnibelle Longerich(M43)" -> "Sara Longerich(F5)"
+"Candace Lilithe(F24)" -> "Lynea Longerich(M20)" [dir=none,color="green"]
+"Candace Lilithe(F24)Lynea Longerich(M20)" -> "Ingrid Longerich(FM2)"
+"Candace Lilithe(F24)Lynea Longerich(M20)" [label="",shape=diamond,height=.1,width=.1]"Candace Lilithe(F24)" -> "Candace Lilithe(F24)Lynea Longerich(M20)" [color="red"]
+"Catriona Longerich(F45)Buffy Guilbert(M45)" -> "Devan Guilbert(F26)"
+"Catriona Longerich(F45)Buffy Guilbert(M45)" [label="",shape=diamond,height=.1,width=.1]"Catriona Longerich(F45)" -> "Catriona Longerich(F45)Buffy Guilbert(M45)" [color="red"]
+"Catriona Longerich(F45)Rosita Daven(M63)" -> "Debbie Daven(F23)"
+"Catriona Longerich(F45)" -> "Rosita Daven(M63)" [dir=none,color="green"]
+"Catriona Longerich(F45)Rosita Daven(M63)" [label="",shape=diamond,height=.1,width=.1]"Catriona Longerich(F45)" -> "Catriona Longerich(F45)Rosita Daven(M63)" [color="red"]
+"Catriona Longerich(F45)Rosita Daven(M63)" -> "Lindi Daven(F24)"
+"Catriona Longerich(F45)Rosita Daven(M63)" -> "Teodora Daven(F25)"
+"Consolata Lilithe(FM25)" -> "Almeda Longerich(F23)Consolata Lilithe(FM25)" [color="blue"]
+"Daffie Lilithe(F22)" -> "Myrtie Longerich(F18)" [dir=none,color="yellow"]
+"Debbie Daven(F23)" -> "Buffy Guilbert(M45)" [dir=none,color="green"]
+"Debbie Daven(F23)Buffy Guilbert(M45)" -> "Eartha Guilbert(M4)"
+"Debbie Daven(F23)Buffy Guilbert(M45)" -> "Kelsey Guilbert(M2)"
+"Debbie Daven(F23)Buffy Guilbert(M45)" [label="",shape=diamond,height=.1,width=.1]"Debbie Daven(F23)" -> "Debbie Daven(F23)Buffy Guilbert(M45)" [color="red"]
+"Debbie Daven(F23)Buffy Guilbert(M45)" -> "Mufinella Guilbert(M3)"
+"Delphinia Longerich(M63)" -> "Myrtie Guilbert(F42)Delphinia Longerich(M63)" [color="blue"]
+"Delphinia Longerich(M63)" -> "Wynne Bonnie(F63)Delphinia Longerich(M63)" [color="blue"]
+"Devan Guilbert(F26)Belicia Amie(M38)" -> "Demetra Amie(FM7)"
+"Devan Guilbert(F26)Belicia Amie(M38)" -> "Jacynth Amie(M6)"
+"Devan Guilbert(F26)Belicia Amie(M38)" [label="",shape=diamond,height=.1,width=.1]"Devan Guilbert(F26)" -> "Devan Guilbert(F26)Belicia Amie(M38)" [color="red"]
+"Devan Guilbert(F26)Belicia Amie(M38)" -> "Shirley Amie(M4)"
+"Devan Guilbert(F26)Belicia Amie(M38)" -> "Wilma Amie(F5)"
+"Devan Guilbert(F26)Bonnibelle Longerich(M43)" -> "Babb Longerich(F2)"
+"Devan Guilbert(F26)" -> "Bonnibelle Longerich(M43)" [dir=none,color="green"]
+"Devan Guilbert(F26)Bonnibelle Longerich(M43)" [label="",shape=diamond,height=.1,width=.1]"Devan Guilbert(F26)" -> "Devan Guilbert(F26)Bonnibelle Longerich(M43)" [color="red"]
+"Devan Guilbert(F26)Bonnibelle Longerich(M43)" -> "Midge Longerich(F0)"
+"Drusie Longerich(F21)Belicia Amie(M38)" -> "Devi Amie(M0)"
+"Drusie Longerich(F21)" -> "Belicia Amie(M38)" [dir=none,color="green"]
+"Drusie Longerich(F21)Belicia Amie(M38)" -> "Dora Amie(F2)"
+"Drusie Longerich(F21)Belicia Amie(M38)" -> "Estel Amie(F1)"
+"Drusie Longerich(F21)Belicia Amie(M38)" [label="",shape=diamond,height=.1,width=.1]"Drusie Longerich(F21)" -> "Drusie Longerich(F21)Belicia Amie(M38)" [color="red"]
+"Edi Amie(M63)" -> "Wynne Bonnie(F63)Edi Amie(M63)" [color="blue"]
+"Elvera Carrelli(F63)Lorne Guilbert(M63)" -> "Buffy Guilbert(M45)"
+"Elvera Carrelli(F63)" -> "Lorne Guilbert(M63)" [dir=none,color="green"]
+"Elvera Carrelli(F63)Lorne Guilbert(M63)" [label="",shape=diamond,height=.1,width=.1]"Elvera Carrelli(F63)" -> "Elvera Carrelli(F63)Lorne Guilbert(M63)" [color="red"]
+"Elvera Carrelli(F63)Lorne Guilbert(M63)" -> "Myrtie Guilbert(F42)"
+"Elvera Carrelli(F63)Lorne Guilbert(M63)" -> "Vinni Guilbert(F43)"
+"Giselle Wilow(M63)" -> "Wilhelmina Amie(F42)Giselle Wilow(M63)" [color="blue"]
+"God" -> "Blanche Stanhope(M63)"
+"God" -> "Delphinia Longerich(M63)"
+"God" -> "Edi Amie(M63)"
+"God" -> "Elvera Carrelli(F63)"
+"God" -> "Giselle Wilow(M63)"
+"God" -> "Lea Rawdan(F63)"
+"God" -> "Lorne Guilbert(M63)"
+"God" -> "Rosita Daven(M63)"
+"God" -> "Sydelle Lilithe(M63)"
+"God" -> "Wynne Bonnie(F63)"
+"Iseabal Stanhope(F20)Minerva Wilow(M20)" -> "Christy Wilow(F0)"
+"Iseabal Stanhope(F20)" -> "Minerva Wilow(M20)" [dir=none,color="green"]
+"Iseabal Stanhope(F20)Minerva Wilow(M20)" -> "Elsinore Wilow(F1)"
+"Iseabal Stanhope(F20)Minerva Wilow(M20)" [label="",shape=diamond,height=.1,width=.1]"Iseabal Stanhope(F20)" -> "Iseabal Stanhope(F20)Minerva Wilow(M20)" [color="red"]
+"Lea Rawdan(F63)" -> "Lindi Daven(F24)" [dir=none,color="yellow"]
+"Lorne Guilbert(M63)" -> "Elvera Carrelli(F63)Lorne Guilbert(M63)" [color="blue"]
+"Lynea Longerich(M20)" -> "Candace Lilithe(F24)Lynea Longerich(M20)" [color="blue"]
+"Mair Amie(F39)Blanche Stanhope(M63)" -> "Iseabal Stanhope(F20)"
+"Mair Amie(F39)Blanche Stanhope(M63)" [label="",shape=diamond,height=.1,width=.1]"Mair Amie(F39)" -> "Mair Amie(F39)Blanche Stanhope(M63)" [color="red"]
+"Mair Amie(F39)Noella Longerich(M44)" -> "Amye Longerich(F16)"
+"Mair Amie(F39)Noella Longerich(M44)" -> "Barb Longerich(F15)"
+"Mair Amie(F39)" -> "Noella Longerich(M44)" [dir=none,color="green"]
+"Mair Amie(F39)Noella Longerich(M44)" [label="",shape=diamond,height=.1,width=.1]"Mair Amie(F39)" -> "Mair Amie(F39)Noella Longerich(M44)" [color="red"]
+"Mair Amie(F39)Noella Longerich(M44)" -> "Myrtie Longerich(F18)"
+"Mair Amie(F39)Noella Longerich(M44)" -> "Tiffani Longerich(F19)"
+"Minerva Wilow(M20)" -> "Iseabal Stanhope(F20)Minerva Wilow(M20)" [color="blue"]
+"Myrtie Guilbert(F42)Buffy Guilbert(M45)" -> "Andreana Guilbert(F22)"
+"Myrtie Guilbert(F42)Buffy Guilbert(M45)" [label="",shape=diamond,height=.1,width=.1]"Myrtie Guilbert(F42)" -> "Myrtie Guilbert(F42)Buffy Guilbert(M45)" [color="red"]
+"Myrtie Guilbert(F42)Buffy Guilbert(M45)" -> "Rubie Guilbert(F24)"
+"Myrtie Guilbert(F42)" -> "Delphinia Longerich(M63)" [dir=none,color="green"]
+"Myrtie Guilbert(F42)Delphinia Longerich(M63)" [label="",shape=diamond,height=.1,width=.1]"Myrtie Guilbert(F42)" -> "Myrtie Guilbert(F42)Delphinia Longerich(M63)" [color="red"]
+"Myrtie Guilbert(F42)Delphinia Longerich(M63)" -> "Lynea Longerich(M20)"
+"Noella Longerich(M44)" -> "Mair Amie(F39)Noella Longerich(M44)" [color="blue"]
+"Rosita Daven(M63)" -> "Catriona Longerich(F45)Rosita Daven(M63)" [color="blue"]
+"Sydelle Lilithe(M63)" -> "Vinni Guilbert(F43)Sydelle Lilithe(M63)" [color="blue"]
+"Teodora Daven(F25)Blanche Stanhope(M63)" -> "Charmain Stanhope(M6)"
+"Teodora Daven(F25)" -> "Blanche Stanhope(M63)" [dir=none,color="green"]
+"Teodora Daven(F25)Blanche Stanhope(M63)" -> "Kipp Stanhope(F5)"
+"Teodora Daven(F25)Blanche Stanhope(M63)" [label="",shape=diamond,height=.1,width=.1]"Teodora Daven(F25)" -> "Teodora Daven(F25)Blanche Stanhope(M63)" [color="red"]
+"Teodora Daven(F25)Blanche Stanhope(M63)" -> "Verile Stanhope(FM3)"
+"Vinni Guilbert(F43)Sydelle Lilithe(M63)" -> "Candace Lilithe(F24)"
+"Vinni Guilbert(F43)Sydelle Lilithe(M63)" -> "Consolata Lilithe(FM25)"
+"Vinni Guilbert(F43)Sydelle Lilithe(M63)" -> "Daffie Lilithe(F22)"
+"Vinni Guilbert(F43)Sydelle Lilithe(M63)" -> "Dawn Lilithe(F21)"
+"Vinni Guilbert(F43)" -> "Sydelle Lilithe(M63)" [dir=none,color="green"]
+"Vinni Guilbert(F43)Sydelle Lilithe(M63)" [label="",shape=diamond,height=.1,width=.1]"Vinni Guilbert(F43)" -> "Vinni Guilbert(F43)Sydelle Lilithe(M63)" [color="red"]
+"Wilhelmina Amie(F42)Bonnibelle Longerich(M43)" -> "Almeda Longerich(F23)"
+"Wilhelmina Amie(F42)Bonnibelle Longerich(M43)" -> "Drusie Longerich(F21)"
+"Wilhelmina Amie(F42)Bonnibelle Longerich(M43)" [label="",shape=diamond,height=.1,width=.1]"Wilhelmina Amie(F42)" -> "Wilhelmina Amie(F42)Bonnibelle Longerich(M43)" [color="red"]
+"Wilhelmina Amie(F42)" -> "Giselle Wilow(M63)" [dir=none,color="green"]
+"Wilhelmina Amie(F42)Giselle Wilow(M63)" [label="",shape=diamond,height=.1,width=.1]"Wilhelmina Amie(F42)" -> "Wilhelmina Amie(F42)Giselle Wilow(M63)" [color="red"]
+"Wilhelmina Amie(F42)Giselle Wilow(M63)" -> "Minerva Wilow(M20)"
+"Wynne Bonnie(F63)Delphinia Longerich(M63)" -> "Bonnibelle Longerich(M43)"
+"Wynne Bonnie(F63)Delphinia Longerich(M63)" -> "Catriona Longerich(F45)"
+"Wynne Bonnie(F63)Delphinia Longerich(M63)" [label="",shape=diamond,height=.1,width=.1]"Wynne Bonnie(F63)" -> "Wynne Bonnie(F63)Delphinia Longerich(M63)" [color="red"]
+"Wynne Bonnie(F63)Delphinia Longerich(M63)" -> "Noella Longerich(M44)"
+"Wynne Bonnie(F63)Edi Amie(M63)" -> "Belicia Amie(M38)"
+"Wynne Bonnie(F63)" -> "Edi Amie(M63)" [dir=none,color="green"]
+"Wynne Bonnie(F63)Edi Amie(M63)" [label="",shape=diamond,height=.1,width=.1]"Wynne Bonnie(F63)" -> "Wynne Bonnie(F63)Edi Amie(M63)" [color="red"]
+"Wynne Bonnie(F63)Edi Amie(M63)" -> "Mair Amie(F39)"
+"Wynne Bonnie(F63)Edi Amie(M63)" -> "Nance Amie(M40)"
+"Wynne Bonnie(F63)Edi Amie(M63)" -> "Wilhelmina Amie(F42)"
+}

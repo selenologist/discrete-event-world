@@ -79,7 +79,7 @@ function Government:birthDeathProcess(time)
         LOGGER:log("-> There are no possible female homo partners", LOG_LEVELS.verbose)
     end
     if possible.homom and #possible.homom >= 2 then
-        local homo = mos.sample(possible.homof, 2)
+        local homo = mos.sample(possible.homom, 2)
         LOGGER:log(("-> %s and %s are now in a homo relationship")
                   :format(homo[1].name, homo[2].name), LOG_LEVELS.verbose)
         homo[1].relationship = {'homo', homo[2]}

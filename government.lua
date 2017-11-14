@@ -25,10 +25,10 @@ function Government:initialize(name)
     local bd_lambda = true -- value must exist to be used from itself
     bd_lambda = function(time)
         self:birthDeathProcess(time)
-        SCHEDULER:schedule(time+TIME.day, bd_lambda)
+        SCHEDULER:schedule(time+TIME.week, bd_lambda)
     end
 
-    SCHEDULER:schedule(SCHEDULER.time+TIME.day, bd_lambda)
+    SCHEDULER:schedule(SCHEDULER.time+TIME.week, bd_lambda)
 end
 
 function Government:birthDeathProcess(time)
@@ -101,6 +101,35 @@ function Government:birthDeathProcess(time)
             p:homo_relationship(time)
         end
     end
+end
+
+function Government:dumpCompanyDOT(prefix)
+    prefix = prefix or ""
+    local filename = prefix..'_comp.dot'
+    local f = io.open(filename, 'w')
+    if not f then
+        print("Failed to open " .. filename)
+        return
+    end
+    f:write('digraph "'..tostring(self.name)..'"{\nrankdir = "LR"\n')
+
+    local now = SCHEDULER.time
+    for _, c in pairs(self.companies) do
+        f:write('subgraph "cluster_'..tostring(c.name)..'"{\n')
+        f:write(('"%s" [label="%s\\n%d employees\\n$%0.02d",shape=box]\n')
+            :format(c.name, c.name, #c.employees, c.finance[1].balance or 0))
+        for _, e in pairs(c.employees) do
+            f:write(('"%s" -> "%s"\n'):format(c.name, e.name))
+            f:write(('"%s" [label="%s\\n$%0.02d\\nJoined %s (%d years)"]\n')
+                    :format(e.name, e.name, e.finance[1].balance,
+                    TIME.date_string(e.employment_time),
+                    TIME.year_number(now - e.employment_time)))
+        end
+        f:write('}\n')
+    end
+
+    f:write('}\n')
+    f:close()
 end
 
 return Government

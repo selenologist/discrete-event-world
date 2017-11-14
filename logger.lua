@@ -21,9 +21,10 @@ end
 logfile=io.open("logfile",'w')
 function Logger:log(x, level)
     level = level or LOG_LEVELS.info
-    logfile:write(tostring(SCHEDULER.time)..': '..x..'\n')
+    local str = TIME.time_string(SCHEDULER.time)..' '..TIME.date_string(SCHEDULER.time)..': '..x
+    logfile:write(str..'\n')
     if level <= self.log_level then
-        print(TIME.date_string(SCHEDULER.time)..': '..x)
+        print(str)
     end
 end
 

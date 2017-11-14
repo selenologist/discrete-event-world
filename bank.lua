@@ -16,10 +16,24 @@ function Bank:register(password, owner)
     repeat
         new_uid = genutils.newUID(8)
     until self.accounts[new_uid] == nil
-    self.accounts[new_uid] = {password=password,
-                              balance=0,
-                              owner=owner}
-    return new_uid
+    local account = {
+        id=new_uid,
+        password=password,
+        balance=0,
+        owner=owner,
+        bank=self,
+        send=
+            function(account, amount, to, to_number)
+                local to_bank = to
+                if to.finance then
+                    to_bank = to.finance[1].bank
+                    to_number = to.finance[1].id
+                end
+                account.bank:send(account.id, account.password, amount, to_bank, to_number)
+            end
+    }
+    self.accounts[new_uid] = account
+    return account
 end
 
 function Bank:getBalance(uid, password)
@@ -36,6 +50,9 @@ function Bank:send(uid, password, amount, otherbank, otheruid)
     if (not acc) or (acc.password ~= password) then
         return nil,'bad-auth'
     elseif (acc.balance < amount) then
+        LOGGER:log(("%s (%s #%d) failed to send %d to %s %d due to insufficient funds!")
+                          :format(acc.owner.name, self.name, uid, amount, otherbank.name, otheruid),
+                          LOG_LEVELS.warn)
         return nil,'insuff-funds'
     else
         local result, err = otherbank:receive(otheruid,amount, self, uid)
@@ -43,8 +60,8 @@ function Bank:send(uid, password, amount, otherbank, otheruid)
             return nil,'dest-'..err
         else
             acc.balance = acc.balance - amount
-            LOGGER:log(("%s %d sent %d to %s %d")
-                              :format(self.name,uid,amount,otherbank.name,otheruid),
+            LOGGER:log(("%s (%s #%d) sent %d to %s %d")
+                              :format(acc.owner.name, self.name, uid, amount, otherbank.name, otheruid),
                               LOG_LEVELS.verbose)
             return true
         end
@@ -57,8 +74,8 @@ function Bank:receive(uid, amount, frombank, fromuid)
         return nil,'no-such-acc'
     else
         acc.balance = acc.balance + amount
-        LOGGER:log(("%s %d received %d from %s %d")
-                          :format(self.name,uid,amount,frombank.name,fromuid),
+        LOGGER:log(("%s (%s #%d) received %d from %s %d")
+                          :format(acc.owner.name, self.name,uid,amount,frombank.name,fromuid),
                           LOG_LEVELS.verbose)
         return true
     end

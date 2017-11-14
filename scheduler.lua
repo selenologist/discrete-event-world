@@ -19,7 +19,6 @@ function Scheduler:schedule(time, lambda)
     local canceller = {false}
     local payload = {lambda, canceller}
     self.pqueue:enqueue(payload, time)
-
     return canceller
 end
 
@@ -40,6 +39,7 @@ function Scheduler:run(until_time)
             return
         elseif canceller[1] then
             -- this event was cancelled, discard it
+            LOGGER:log("Ev cancelled: " .. canceller[2] or "no other info supplied")
             return
         else
             lambda(time)

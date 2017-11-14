@@ -14,9 +14,11 @@ end
 Person.static.name_mt.__tostring = Person.static.name_mt.__call
 
 function Person:initialize(govt, mother, father)
+    -- register with govt
     self.government = govt
     table.insert(govt.people, self)
-    
+
+    -- set immutables
     local first,last = Names.randomName()
     self.age=-1
     
@@ -31,14 +33,12 @@ function Person:initialize(govt, mother, father)
     self.name={first=first, last=last}
     setmetatable(self.name, Person.name_mt)
     self.parents={m=mother or false, f=father or false}
-    self.location='home'
-    self.fertile={false,{immature=true}}
 
     local sex = {}
     local rand = math.random()
     if rand < 0.5 then
         sex.f = true
-    elseif rand > 0.95 then
+    elseif rand > 0.98 then
         sex.f = true
         sex.m = true
     else
@@ -50,62 +50,102 @@ function Person:initialize(govt, mother, father)
                       :format(self.name, self:sexSymbol()),
                       LOG_LEVELS.info)
 
-    self.birthtime = SCHEDULER.time
+    self.birth_time = SCHEDULER.time
+    
+    -- set mutables
+    
+    self.location='home'
+    self.fertile={false,{immature=true}}
+
     -- events that should be cancelled if the Person dies
-    self.death_cancels = {}
+    self.pending_events = {}
     -- events that should be triggered if the Person dies
     self.death_triggers = {}
     
+    -- schedule ageup and daily events
     local age_up_lambda = true
     age_up_lambda = function(time)
-        self.age = self.age + 1
-        if self.age > 1 then
-            LOGGER:log(("It is %s's %dth birthday")
-                              :format(self.name, self.age),
-                              LOG_LEVELS.verbose)
-        end
+        self:ageUp(time)
+        self.pending_events.age_up = SCHEDULER:schedule(time+TIME.year, age_up_lambda)
+    end
+    age_up_lambda(SCHEDULER.time)
 
-        if self.age == 16 then
-            local bank = mos.sample(govt.banks)[1]
-            local account = {bank=bank, password=genutils.newPassword(6,1)}
-            account.id = bank:register(account.password, self)
-            self.finance = {account}
-            
-            local company = mos.sample(self.government.companies)[1]
-            company:employ(self)
+    local daily_lambda = true
+    daily_lambda = function(time)
+        self:dailyEvents(time)
+        self.pending_events.daily = SCHEDULER:schedule(time+TIME.day, daily_lambda)
+    end
+    self.pending_events.daily = SCHEDULER:schedule(
+        TIME.tomorrow(SCHEDULER.time),
+        daily_lambda)
+end
 
-            local rand = math.random()
-            local a,b = false,false
-            if rand < 0.6 then
-                a = true
-            elseif rand > 0.8 then
-                a = true
-                b = true
-            else
-                b = true
-            end
+function Person:dailyEvents(time)
+    local employer = self.employer
+    if employer then
+        SCHEDULER:schedule(TIME.today(time) + employer.open_time,
+            function(time)
+                if self.location == 'home' then
+                    employer:employeeArrival(time, self)
+                else
+                    LOGGER:log(("%s was not at home when due for work and so did not go to work!")
+                               :format(self.name()),
+                               LOG_LEVEL.warn)
+                end
+            end)
+    end
+end
 
-            if self.sex.f then
-                self.sex_pref = {m=a,f=b}
-                self.pregnancies = 0
-            else
-                self.sex_pref = {f=a,m=b}
-            end
+function Person:leaveWork(time)
+    LOGGER:log(("%s has left work"):format(self.name()), LOG_LEVELS.verbose)
+    self.location = 'home'
+end
 
-            LOGGER:log(("%s %s %s men and %s women")
-                       :format(self.name, self:sexSymbol(),
-                              (self.sex_pref.m and "likes" or "doesn't like"),
-                              (self.sex_pref.f and "likes" or "doesn't like")))
-        end
-
-        if self.age == 18 then
-            self.fertile = {true,{}}    
-        end
-
-        self.death_cancels.age_up = SCHEDULER:schedule(time+TIME.year, age_up_lambda)
+function Person:ageUp(time)
+    self.age = self.age + 1
+    if self.age > 1 then
+        LOGGER:log(("It is %s's %dth birthday")
+                          :format(self.name, self.age),
+                          LOG_LEVELS.verbose)
     end
 
-    age_up_lambda(SCHEDULER.time)
+    if self.age == 16 then
+        local govt = self.government
+        local bank = mos.sample(govt.banks)[1]
+        local password = genutils.newPassword(6,1)
+        local account = bank:register(password, self)
+        self.finance = {account}
+        
+        local company = mos.sample(self.government.companies)[1]
+        company:employ(self)
+
+        local rand = math.random()
+        local a,b = false,false
+        if rand < 0.6 then
+            a = true
+        elseif rand > 0.8 then
+            a = true
+            b = true
+        else
+            b = true
+        end
+
+        if self.sex.f then
+            self.sex_pref = {m=a,f=b}
+            self.pregnancies = 0
+        else
+            self.sex_pref = {f=a,m=b}
+        end
+
+        LOGGER:log(("%s %s %s men and %s women")
+                   :format(self.name, self:sexSymbol(),
+                          (self.sex_pref.m and "likes" or "doesn't like"),
+                          (self.sex_pref.f and "likes" or "doesn't like")))
+    end
+
+    if self.age == 18 then
+        self.fertile = {true,{}}    
+    end 
 end
 
 function Person:sexSymbol(age)
@@ -151,6 +191,10 @@ function Person:dumpDOT(prefix)
         end
 
         f:write(('"%s" -> "%s"\n'):format(pnode,cname))
+        f:write(('"%s" [label="%s\\nBorn %s%s\\n$%.02d",shape=box]\n')
+            :format(cname, cname, TIME.date_string(child.birth_time),
+                    child.employer and "\\nWorks at "..child.employer.name or '',
+                    child.employer and child.finance[1].balance or 0))
     end
     trav(self)
     f:write("}")
@@ -170,7 +214,7 @@ function Person.static.mother_recovery(mother)
                 break
             end
         end
-        if mother.pregnancies >= 3 and math.random() < 0.5 then
+        if mother.pregnancies >= 2 and math.random() < 0.6 then
             other_reason=true
             mother.fertile[2].had_many = true
         end
@@ -186,7 +230,7 @@ function Person.static.pregnancy(govt, mother, father)
         local person = Person:new(govt, mother, father)
 
         -- there is no longer an event to cancel on death
-        mother.death_cancels.pregnant = nil
+        mother.pending_events.pregnant = nil
         -- make fertile again after pregnancy
         mother.fertile[2].pregnant = nil
         mother.fertile[2].recovery = true
@@ -199,7 +243,7 @@ end
 function Person:breakup_recovery()
     return function(time)
         self.relationship = nil
-        self.death_cancels.breakup_recovery = nil
+        self.pending_events.breakup_recovery = nil
     end
 end
 
@@ -214,7 +258,7 @@ function Person:hetero_relationship(time)
 
         mother.fertile = {false,{pregnant=true}}
         mother.pregnancies = mother.pregnancies + 1
-        mother.death_cancels.pregnant = SCHEDULER:schedule(
+        mother.pending_events.pregnant = SCHEDULER:schedule(
             SCHEDULER.time + 40*TIME.week + (math.random()-0.5)*2*TIME.week, 
             Person.pregnancy(self.government, mother, father))
     elseif rand > 0.95 then
@@ -223,10 +267,10 @@ function Person:hetero_relationship(time)
         local relationship = {'broken-up'}
         mother.relationship = relationship
         father.relationship = relationship
-        mother.death_cancels.breakup_recovery = SCHEDULER:schedule(
+        mother.pending_events.breakup_recovery = SCHEDULER:schedule(
             time + math.random() * 2 * TIME.week,
             mother:breakup_recovery())
-        father.death_cancels.breakup_recovery = SCHEDULER:schedule(
+        father.pending_events.breakup_recovery = SCHEDULER:schedule(
             time + math.random() * 2 * TIME.week,
             father:breakup_recovery())
     end
@@ -241,10 +285,10 @@ function Person:homo_relationship(time)
         local relationship = {'broken-up'}
         a.relationship = relationship
         b.relationship = relationship
-        a.death_cancels.breakup_recovery = SCHEDULER:schedule(
+        a.pending_events.breakup_recovery = SCHEDULER:schedule(
             time + math.random() * 2 * TIME.week,
             a:breakup_recovery())
-        b.death_cancels.breakup_recovery = SCHEDULER:schedule(
+        b.pending_events.breakup_recovery = SCHEDULER:schedule(
             time + math.random() * 2 * TIME.week,
             b:breakup_recovery())
     end

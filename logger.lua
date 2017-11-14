@@ -1,5 +1,7 @@
 local class = require "middleclass"
 
+local TIME = require "TIME"
+
 local Logger = class('Logger')
 
 LOG_LEVELS={
@@ -21,7 +23,7 @@ function Logger:log(x, level)
     level = level or LOG_LEVELS.info
     logfile:write(tostring(SCHEDULER.time)..': '..x..'\n')
     if level <= self.log_level then
-        print(tostring(SCHEDULER.time)..': '..x)
+        print(TIME.date_string(SCHEDULER.time)..': '..x)
     end
 end
 

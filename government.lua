@@ -13,9 +13,14 @@ local Government = class('Government')
 function Government:initialize(name)
     self.name         = name
     self.tot_currency = 0
+    -- List of people organised by this government
     self.people       = {}
+    -- List of banks within this government
     self.banks        = {}
+    -- List of companies within this government
     self.companies    = {}
+    -- List of companies within this government organised by industry
+    self.industries   = {}
 
     local bd_lambda = true -- value must exist to be used from itself
     bd_lambda = function(time)

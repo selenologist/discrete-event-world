@@ -82,7 +82,7 @@ end
 
 function Person:dailyEvents(time)
     local employer = self.employer
-    if employer then
+    if employer and employer:isOpenOnDay(time) then
         SCHEDULER:schedule(TIME.today(time) + employer.open_time,
             function(time)
                 if self.location == 'home' then

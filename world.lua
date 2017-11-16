@@ -38,22 +38,23 @@ function MakeTestWorld()
     local dl   = Company:new(govt, "Downlink Corporation")
     local is   = Company:new(govt, "Infinity Solutions")
     local ld   = Company:new(govt, "Lattice Design")
-    ld.wage    = 45
+    ld.wage    = 40
     ld.pay_policy = 'wage'
     local tc   = Company:new(govt, "Tyrell Corporation")
     local ec   = Company:new(govt, "E Corp")
-    ec.reserve = 0.2
+    ec.reserve = 0.3
 
-    local mj   = CateringCompany:new(govt, "MacJack's")
+    local mj     = CateringCompany:new(govt, "MacJack's")
     mj.food_cost = 10
-    mj.wage    = 14
+    mj.wage      = 12
+    mj.margin    = 4
     local rw   = CateringCompany:new(govt, "Red Wheelbarrow")
-    rw.wage = 25
-    rw.margin = 3.15
-    local dc   = CateringCompany:new(govt, "The Dead Cow")
+    rw.wage    = 25
+    rw.margin  = 3.15
+    local dc      = CateringCompany:new(govt, "The Dead Cow")
     dc.pay_policy = 'fairshare'
 
-    local p    = mos.times(30, function() local p=Person:new(govt) end)
+    local p    = mos.times(100, function() local p=Person:new(govt) end)
 
     return {govt,p}
 end

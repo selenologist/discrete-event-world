@@ -26,7 +26,7 @@ function Company:initialize(govt, name, industry)
     local password = genutils.newPassword(8,2)
     local account = bank:register(password, self)
     self.finance = {account}
-    account.bank:receive(account.id, 50000, {name="Magic Initial Company Money"}, 31337)
+    account.bank:receive(account.id, 100000, {name="Magic Initial Company Money"}, 31337)
 
     --- Set overridable parameters
     self.days_open = {[0]=true,[1]=true,[2]=true,[3]=true,[4]=true} -- open weekdays
@@ -112,7 +112,7 @@ function Company:workingDayEvents(time)
     if #self.employees > 0 then
         self:orderCatering(time)
         if self.industry == 'generic' then
-            self.week.income = (self.week.income or 0) + 500 * math.pow(1.1, self.employees_present.num)
+            self.week.income = (self.week.income or 0) + 1400 * math.pow(1.1, self.employees_present.num)
         end
         
         self.pending_events.close = SCHEDULER:schedule(
